@@ -5,6 +5,8 @@
 .grid {
     height: 400px;
     width: 400px;
+    display: flex;
+    flex-wrap: wrap;
     background-color: #dcd6bc;
     margin-left: 50px;
     margin-top: 20px;
@@ -12,7 +14,7 @@
     margin-bottom: 10px;
 }
 
-div {
+.grid div {
     font-size: 25px;
     text-align: center;
     font-family: monospace;

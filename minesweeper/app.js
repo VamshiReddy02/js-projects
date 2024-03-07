@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', () =>{
    const grid = document.querySelector('.grid')
+   const flagsLeft = document.querySelector('#flag-left')
    const width = 10
-
-   console.log(grid)
+   let bombAmount = 20
 
    function createBoard() {
+
+    flagsLeft.innerHTML = bombAmount
+
+    const bombArray = Array(bombAmount).fill('bomb')
+    const emptyArray = Array(width * width - bombAmount).fill('valid')
+    const gameArray = emptyArray.concat(bombArray)
+    const shuffledArray = gameArray.sort(()=> Math.random() - 0.5)
+    console.log(shuffledArray)
+    console.log(emptyArray)
+    console.log(bombArray)
         for (let i = 0; i < width * width; i++) {
            const square = document.createElement('div')
+           square.id = i
            grid.appendChild(square)
         }
    }
