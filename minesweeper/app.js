@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () =>{
    let bombAmount = 20
    let squares = []
    let isGameOver = false
+   let flags = 0
 
    function createBoard() {
 
@@ -22,12 +23,12 @@ document.addEventListener('DOMContentLoaded', () =>{
            grid.appendChild(square)
            squares.push(square)  
            
-           square.addEventListener('click', (e)=>{
+           square.addEventListener('click', ()=>{
                 click(square)
            })
 
-           square.addEventListener('click', (e)=>{
-                //addFlag(square)
+           square.addEventListener('contextmenu', ()=>{
+                addFlag(square)
            })
         }
 
@@ -52,6 +53,24 @@ document.addEventListener('DOMContentLoaded', () =>{
    }
 
    createBoard()
+
+   function addFlag(square) {
+    if (isGameOver) return
+    if (!square.classList.contains('contains') && (flags < bombAmount)){
+        if (!square.classList('flag')){
+            square.classList.add('flag')
+            flags++
+            square.innerHTML = '⛳️'
+            flagsLeft.innerHTML = bombAmount - flags
+            checkWin()
+        } else {
+            square.classList.add('flag')
+            flags--
+            square.innerHTML = ''
+            flagsLeft.innerHTML = bombAmount - flags
+        }
+    }
+   }
 
 
    function click(square) {
@@ -123,6 +142,20 @@ document.addEventListener('DOMContentLoaded', () =>{
             click(newSquare)
             }
     }, 10)
+   }
+
+   function checkWin() {
+    let matches = 0
+    for (let i = 0; i < squares.length; i++) {
+        if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')){
+            matches++
+        }
+        if (matches === bombAmount) {
+            result.innerHTML = ' YOU WIN!'
+            isGameOver = true
+        }
+        
+    }
    }
 
    function gameOver() {
