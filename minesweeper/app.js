@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
     squares.forEach(function(square) {
         if(square.classList.contains('bomb')) {
-            square.innerHTML = 'boo'
+            square.innerHTML = '💣'
             square.classList.remove('bomb')
             square.classList.add('checked')
         }
